@@ -22,7 +22,7 @@
 
                 <data
                     android:path="/oauth2redirect"
-                    android:scheme="com.skgtecnologia.helios" />
+                    android:scheme="com.skgtecnologia.helios.authenticationmodule" />
             </intent-filter>
 
             <intent-filter>
