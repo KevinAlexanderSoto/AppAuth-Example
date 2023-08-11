@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import com.skgtecnologia.helios.authenticationmodule.domain.AuthStateManager
 import com.skgtecnologia.helios.authenticationmodule.domain.AuthenticationTokenExchange
+import com.skgtecnologia.helios.authenticationmodule.domain.Router
 import com.skgtecnologia.helios.authenticationmodule.presentation.LogInScreen
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -19,7 +19,7 @@ class LogInActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val LogInIntent: Intent by inject()
         val authenticationTokenExchange: AuthenticationTokenExchange by inject()
-        val authStateManager: AuthStateManager by inject()
+        val authenticationRouter: Router by inject()
         val getResult =
             registerForActivityResult(
                 ActivityResultContracts.StartActivityForResult(),
@@ -27,8 +27,9 @@ class LogInActivity : ComponentActivity() {
                 if (it.resultCode == Activity.RESULT_OK) {
                     Toast.makeText(this, "Authentication DONE!!", Toast.LENGTH_LONG).show()
                     val value = it.data!!
-                    authenticationTokenExchange.requestToken(value)
-                    // TODO: Navigation??
+                    authenticationTokenExchange.requestToken(value) {
+                        authenticationRouter.OnUserAuthenticated()
+                    }
                 } else {
                     Toast.makeText(this, "Authentication FAILURE!!", Toast.LENGTH_LONG).show()
                 }

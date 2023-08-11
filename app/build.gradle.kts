@@ -72,7 +72,10 @@ dependencies {
     // Dependency to use the library
     implementation(project(mapOf("path" to ":authenticationModule")))
 
+// APPAUTH SECTION
+    implementation("net.openid:appauth:0.11.1")
 
+    implementation("com.auth0.android:jwtdecode:2.0.0")
 
 
     testImplementation("junit:junit:4.13.2")

@@ -4,6 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.text.TextUtils
 import com.auth0.android.jwt.JWT
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import net.openid.appauth.AuthState
 import org.json.JSONException
 
@@ -29,6 +32,11 @@ class AuthStateManager(
             .apply()
     }
 
+    private val _currentToken =
+        MutableStateFlow<String>("mutableListOf()")
+    val currentToken: StateFlow<String>
+        get() = _currentToken.asStateFlow()
+
     fun restoreState(): AuthState {
         val jsonString = context
             .getSharedPreferences(
@@ -37,10 +45,11 @@ class AuthStateManager(
             )
             .getString(AuthenticationRequestIntentProvider.AUTH_STATE, null)
 
-        if (jsonString != null && !TextUtils.isEmpty(jsonString)) {
+        if (!jsonString.isNullOrEmpty()) {
             try {
                 authState = AuthState.jsonDeserialize(jsonString)
-
+                _currentToken.value = authState.accessToken ?: "No found"
+// TODO: Handle this part
                 if (!TextUtils.isEmpty(authState.idToken)) {
                     val jwt = JWT(authState.idToken!!)
                 }

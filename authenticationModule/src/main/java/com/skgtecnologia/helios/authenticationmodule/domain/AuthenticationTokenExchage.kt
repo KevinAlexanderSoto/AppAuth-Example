@@ -14,33 +14,27 @@ class AuthenticationTokenExchange(
     private val authorizationService: AuthorizationService,
     private val authStateManager: AuthStateManager,
 ) {
-
-    private var _authState =
-        MutableStateFlow<AuthState>(AuthState())
-    val authState: StateFlow<AuthState>
-        get() = _authState.asStateFlow()
-
     fun requestToken(
         value: Intent,
+        onTokenReceived: () -> Unit,
     ) {
         val authorizationResponse: AuthorizationResponse? =
             AuthorizationResponse.fromIntent(value)
         val error = AuthorizationException.fromIntent(value)
 
         authStateManager.persistState(AuthState(authorizationResponse, error))
-        _authState.value = AuthState(authorizationResponse, error)
+        val currentAuthenticationState = AuthState(authorizationResponse, error)
         val tokenExchangeRequest = authorizationResponse?.createTokenExchangeRequest()
 
         if (tokenExchangeRequest != null) {
             authorizationService.performTokenRequest(tokenExchangeRequest) { response, exception ->
                 if (exception != null) {
-                    _authState.update {
-                        AuthState()
-                    }
+                    // Handle exception
                 } else {
                     if (response != null) {
-                        _authState.value.update(response, exception)
-                        authStateManager.persistState(_authState.value)
+                        currentAuthenticationState.update(response, exception)
+                        authStateManager.persistState(currentAuthenticationState)
+                        onTokenReceived()
                     }
                 }
             }
