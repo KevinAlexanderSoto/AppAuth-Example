@@ -36,7 +36,7 @@ class AuthenticationRequestIntentProvider(
         const val CLIENT_ID = "smm-qa-test"
 
         const val URL_AUTHORIZATION = "https://keycloak.sitbogota.com/auth/realms/smm-qa-env/protocol/openid-connect/auth"
-        const val URL_TOKEN_EXCHANGE = ""
+        const val URL_TOKEN_EXCHANGE = "https://keycloak.sitbogota.com/auth/realms/smm-qa-env/protocol/openid-connect/token"
         const val URL_AUTH_REDIRECT = "com.skgtecnologia.helios.authenticationmodule:/oauth2redirect"
     }
 }
