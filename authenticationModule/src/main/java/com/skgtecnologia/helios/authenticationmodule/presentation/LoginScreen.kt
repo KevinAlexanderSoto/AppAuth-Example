@@ -25,12 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.skgtecnologia.helios.authenticationmodule.R
 import com.skgtecnologia.helios.authenticationmodule.common.composables.SkgButton
-import com.skgtecnologia.helios.authenticationmodule.common.composables.SkgTextInput
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LogInScreen(
-    informationViewModel: LogInInformationViewModel = koinViewModel(),
     onLogInClick: () -> Unit,
 ) {
     Box(
@@ -59,36 +56,9 @@ fun LogInScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 LogInCardTitle()
-                SkgTextInput.OutLinedTextField(
-                    label = R.string.email_text_field_label, // TODO: Add configuration
-                    onTextChange = {
-                        informationViewModel.updateEmail(it)
-                    },
-                    isError = informationViewModel.showError,
-                )
-                SkgTextInput.OutLinedPasswordField(
-                    label = R.string.email_text_field_label, // TODO: Add configuration
-                    onTextChange = {
-                        informationViewModel.updatePassWord(it)
-                    },
-                    isError = informationViewModel.showError,
-                )
+                Text(text = "Algo ha salido mal, intenta ingresar otra vez") // TODO: Add configuration
                 SkgButton.ButtonPlusIcon(isEnable = true) {
                     onLogInClick()
-                    if (informationViewModel.onLogInButtonClickValidation()) {
-                        // TODO: Handle this action
-                    } else {
-                        informationViewModel.showError = true
-                    }
-                }
-                Text(text = "O ingresa con") // TODO: Add configuration
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    SkgButton.CircleButton {
-                    }
-                    SkgButton.CircleButton {
-                    }
                 }
             }
         }
@@ -121,5 +91,5 @@ fun LogInCardTitle() {
 @Preview
 @Composable
 fun preview() {
- //   LogInScreen()
+    //   LogInScreen()
 }
