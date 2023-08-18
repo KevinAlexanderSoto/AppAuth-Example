@@ -51,9 +51,10 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("com.google.androidbrowserhelper:androidbrowserhelper:2.5.0")
 // COMPOSE SECTION
 
-    val compose_version = "1.4.3"
+    val compose_version = "1.5.0"
     implementation("androidx.compose.animation:animation-core:$compose_version")
     implementation("androidx.compose.animation:animation:$compose_version")
     implementation("androidx.compose.ui:ui:$compose_version")
@@ -74,6 +75,8 @@ dependencies {
     implementation("net.openid:appauth:0.11.1")
 
     implementation("com.auth0.android:jwtdecode:2.0.0")
+
+    implementation("androidx.browser:browser:1.6.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
