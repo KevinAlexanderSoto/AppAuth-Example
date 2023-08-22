@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -27,6 +28,7 @@ object SkgButton {
     fun ButtonPlusIcon(
         isEnable: Boolean,
         onClick: () -> Unit,
+        buttonColor: ButtonColors = ButtonDefaults.buttonColors(),
     ) {
         Button(
             onClick = {
@@ -38,6 +40,7 @@ object SkgButton {
             shape = RoundedCornerShape(23.dp),
             contentPadding = PaddingValues(8.dp),
             enabled = isEnable,
+            colors = buttonColor,
         ) {
             Icon(
                 imageVector = Icons.Filled.ArrowForwardIos, // TODO: Add configuration
