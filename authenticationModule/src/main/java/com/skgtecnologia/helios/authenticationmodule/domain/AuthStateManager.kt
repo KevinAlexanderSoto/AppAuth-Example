@@ -12,6 +12,7 @@ import org.json.JSONException
  * An persistence mechanism for an {@link AuthState} instance.
  * This stores the instance in a shared preferences file, and provides thread-safe access and
  * mutation.
+ * @author Kevin Penaranda
  */
 class AuthStateManager(
     private val context: Application,
@@ -30,6 +31,7 @@ class AuthStateManager(
             .apply()
     }
 
+    // TODO: Delete this when a final release of this library is ready for the app
     private val _currentToken =
         MutableStateFlow<String>("mutableListOf()")
     val currentToken: StateFlow<String>

@@ -7,6 +7,20 @@ import net.openid.appauth.AuthorizationService
 import net.openid.appauth.AuthorizationServiceConfiguration
 import net.openid.appauth.ResponseTypeValues
 
+/**
+ * this class is responsible for providing an intent for authentication.This Intent will be used for AppAuth to launch a customTabs
+ *
+ * The class has several properties, such as  authorizationService ,  baseTabFactory ,  serviceConfig ,  clientId ,  redirectUri , and  authorizationBuilder .
+ *
+ * The  serviceConfig  property is an instance of  AuthorizationServiceConfiguration  that is initialized with two URIs representing the authorization endpoint and the token endpoint.
+ *
+ * The  redirectUri  property is an instance of  Uri  representing the redirect URI.
+ *
+ * The  authorizationBuilder  property is an instance of  AuthorizationRequest.Builder  that is initialized with the  serviceConfig ,  clientId ,  ResponseTypeValues.CODE , and  redirectUri .
+ *
+ * The  getAuthenticationIntent  function sets the scopes to  SCOPE_KEY_CLOAK , builds an authorization request using the  authorizationBuilder , and returns the intent obtained from the  authorizationService  by passing the authorization request and the intent obtained from  baseTabFactory .
+ *@author Kevin Penaranda
+ * **/
 class AuthenticationRequestIntentProvider(
     private val authorizationService: AuthorizationService,
     private val baseTabFactory: CustomTabFactory,

@@ -9,7 +9,18 @@ import net.openid.appauth.AuthState
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
-
+/**
+ * This is a class called AuthenticationTokenExchange that is responsible for exchanging an authorization code for an access token. It takes in an AuthorizationService and an AuthStateManager as dependencies.
+ *
+ * The requestToken function takes in an Intent and a callback function onTokenReceived. It first retrieves the AuthorizationResponse and any error from the Intent and persists it in the AuthStateManager.
+ * Then, it creates a TokenExchangeRequest from the AuthorizationResponse and sends it to the AuthorizationService to exchange for an access token.
+ *
+ * If there is an exception during the token exchange, it is handled accordingly. If there is a response, the current authentication state is updated with the new token and persisted in the AuthStateManager.
+ * Finally, the onTokenReceived callback is called.
+ *
+ * Overall, this class facilitates the exchange of an authorization code for an access token and manages the authentication state of the user.
+ * @author Kevin Penaranda
+ * **/
 class AuthenticationTokenExchange(
     private val authorizationService: AuthorizationService,
     private val authStateManager: AuthStateManager,

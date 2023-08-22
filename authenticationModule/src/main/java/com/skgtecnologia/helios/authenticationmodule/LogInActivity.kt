@@ -8,8 +8,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import com.skgtecnologia.helios.authenticationmodule.domain.AuthenticationTokenExchange
 import com.skgtecnologia.helios.authenticationmodule.domain.Router
 import com.skgtecnologia.helios.authenticationmodule.presentation.LogInScreen
@@ -28,7 +26,7 @@ class LogInActivity : ComponentActivity() {
             if (it.resultCode == Activity.RESULT_OK) {
                 val value = it.data!!
                 authenticationTokenExchange.requestToken(value) {
-                    authenticationRouter.OnUserAuthenticated()
+                    authenticationRouter.onUserAuthenticated()
                 }
             } else {
                 Toast.makeText(this, "Intentelo otra vez", Toast.LENGTH_LONG).show()

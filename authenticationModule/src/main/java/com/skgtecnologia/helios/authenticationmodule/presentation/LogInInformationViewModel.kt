@@ -6,6 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import java.util.regex.Pattern
 
+/**
+ * Base viewmodel to validate fields, it is not implemented in this library, but could be usefully in others impl
+ *@author Kevin Peñaranda
+ * **/
 class LogInInformationViewModel() : ViewModel() {
 
     var email by mutableStateOf("")
