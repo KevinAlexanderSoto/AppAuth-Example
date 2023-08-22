@@ -26,13 +26,12 @@ class LogInActivity : ComponentActivity() {
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                Toast.makeText(this, "Authentication DONE!!", Toast.LENGTH_LONG).show()
                 val value = it.data!!
                 authenticationTokenExchange.requestToken(value) {
                     authenticationRouter.OnUserAuthenticated()
                 }
             } else {
-                Toast.makeText(this, "Authentication FAILURE!!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Intentelo otra vez", Toast.LENGTH_LONG).show()
             }
         }
 

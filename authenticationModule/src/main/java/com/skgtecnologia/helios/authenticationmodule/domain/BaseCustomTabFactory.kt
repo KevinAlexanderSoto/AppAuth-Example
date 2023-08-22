@@ -3,6 +3,7 @@ package com.skgtecnologia.helios.authenticationmodule.domain
 import android.R
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.compose.ui.graphics.Color
 import net.openid.appauth.AuthorizationService
 
 class BaseCustomTabFactory(
@@ -11,7 +12,7 @@ class BaseCustomTabFactory(
     override fun getCustomTabIntent(): CustomTabsIntent {
         return authorizationService.createCustomTabsIntentBuilder().setDefaultColorSchemeParams(
             CustomTabColorSchemeParams.Builder()
-                .setToolbarColor(android.R.attr.colorPrimaryDark)
+                .setToolbarColor(0xFF19202E.toInt())
                 .build(),
         ) // set the alternative dark color scheme
             .setColorSchemeParams(
