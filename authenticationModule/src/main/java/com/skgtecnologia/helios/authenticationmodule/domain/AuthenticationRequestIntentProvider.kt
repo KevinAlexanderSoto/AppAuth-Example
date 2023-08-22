@@ -8,7 +8,8 @@ import net.openid.appauth.AuthorizationServiceConfiguration
 import net.openid.appauth.ResponseTypeValues
 
 class AuthenticationRequestIntentProvider(
-    private val authenticationService: AuthorizationService,
+    private val authorizationService: AuthorizationService,
+    private val baseTabFactory: CustomTabFactory,
 ) {
     private val serviceConfig = AuthorizationServiceConfiguration(
         Uri.parse(URL_AUTHORIZATION), // authorization endpoint
@@ -22,11 +23,16 @@ class AuthenticationRequestIntentProvider(
         ResponseTypeValues.CODE,
         redirectUri,
     )
+
     fun getAuthenticationIntent(): Intent {
         authorizationBuilder.setScopes(SCOPE_KEY_CLOAK)
         val authRequest = authorizationBuilder.build()
-        return authenticationService.getAuthorizationRequestIntent(authRequest)
+        return authorizationService.getAuthorizationRequestIntent(
+            authRequest,
+            baseTabFactory.getCustomTabIntent(),
+        )
     }
+
     companion object {
         const val SHARED_PREFERENCES_NAME = "AUTH_STATE_PREFERENCE"
         const val AUTH_STATE = "AUTH_STATE"
@@ -35,8 +41,11 @@ class AuthenticationRequestIntentProvider(
 
         const val CLIENT_ID = "smm-qa-test"
 
-        const val URL_AUTHORIZATION = "https://keycloak.sitbogota.com/auth/realms/smm-qa-env/protocol/openid-connect/auth"
-        const val URL_TOKEN_EXCHANGE = "https://keycloak.sitbogota.com/auth/realms/smm-qa-env/protocol/openid-connect/token"
-        const val URL_AUTH_REDIRECT = "com.skgtecnologia.helios.authenticationmodule:/oauth2redirect"
+        const val URL_AUTHORIZATION =
+            "https://keycloak.sitbogota.com/auth/realms/smm-qa-env/protocol/openid-connect/auth"
+        const val URL_TOKEN_EXCHANGE =
+            "https://keycloak.sitbogota.com/auth/realms/smm-qa-env/protocol/openid-connect/token"
+        const val URL_AUTH_REDIRECT =
+            "com.skgtecnologia.helios.authenticationmodule:/oauth2redirect"
     }
 }
