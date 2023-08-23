@@ -13,11 +13,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
-        manifestPlaceholders["appAuthRedirectScheme"] = "com.skgtecnologia.helios.authenticationmodule"
-
+        manifestPlaceholders["appAuthRedirectScheme"] =
+            "com.skgtecnologia.helios.authenticationmodule"
     }
-
-
 
     buildTypes {
         release {
