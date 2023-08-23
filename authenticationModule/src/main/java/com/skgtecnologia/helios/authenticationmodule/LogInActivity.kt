@@ -9,7 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import com.skgtecnologia.helios.authenticationmodule.domain.AuthenticationTokenExchange
-import com.skgtecnologia.helios.authenticationmodule.domain.Router
+import com.skgtecnologia.helios.authenticationmodule.domain.AuthenticationRouter
 import com.skgtecnologia.helios.authenticationmodule.presentation.LogInScreen
 import org.koin.android.ext.android.inject
 
@@ -19,7 +19,7 @@ class LogInActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val loginIntent: Intent by inject()
         val authenticationTokenExchange: AuthenticationTokenExchange by inject()
-        val authenticationRouter: Router by inject()
+        val authenticationRouter: AuthenticationRouter by inject()
         val getResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
