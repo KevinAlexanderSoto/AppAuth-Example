@@ -1,6 +1,8 @@
 package com.skgtecnologia.helios.authenticationexample
 
 import android.app.Application
+import com.skgtecnologia.helios.authenticationexample.api.DemoApiModule
+import com.skgtecnologia.helios.authenticationexample.network.networkModule
 import com.skgtecnologia.helios.authenticationmodule.di.logInModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -13,7 +15,7 @@ class MainApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MainApplication)
-            modules(router, logInModule)
+            modules(router, logInModule, networkModule, DemoApiModule)
         }
     }
 }

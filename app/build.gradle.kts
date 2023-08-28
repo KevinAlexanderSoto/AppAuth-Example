@@ -18,7 +18,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        manifestPlaceholders["appAuthRedirectScheme"] = "com.skgtecnologia.helios.authenticationmodule"
+        manifestPlaceholders["appAuthRedirectScheme"] =
+            "com.skgtecnologia.helios.authenticationmodule"
     }
 
     buildTypes {
@@ -63,7 +64,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
-
     // Koin for Android
     implementation("io.insert-koin:koin-androidx-compose:3.4.6")
     implementation("io.insert-koin:koin-androidx-compose-navigation:3.4.6")
@@ -77,6 +77,9 @@ dependencies {
 
     implementation("com.auth0.android:jwtdecode:2.0.0")
 
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -1,8 +1,8 @@
-package com.skgtecnologia.helios.authenticationmodule
+package com.skgtecnologia.helios.authenticationexample.network
 
 import com.skgtecnologia.helios.authenticationmodule.domain.AuthStateManager
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -18,20 +18,21 @@ class NetworkCallHandler(
     ) = flow<Boolean> {
         emit(true) // Emit loading status
         try {
-            GlobalScope.launch { // TODO: Change with a viewModel scope
+            CoroutineScope(Dispatchers.IO).launch { // TODO: Change with a viewModel scope
                 val authState = getCurrentAuthenticationState()
                 val tokenRefresh = async(Dispatchers.IO) {
                     authState.performActionWithFreshTokens(
                         authorizationService,
                     ) { accessToken, idToken, exception ->
-                        // TODO: Add an interceptor and update the token on every request, and set the interceptor to the API
+                        ApiNetworkInterceptor.setCurrentToken(accessToken)
                     }
                 }
-                // TODO: After refresh the token, make the network call
+                // TODO: Review the working scope of this part
                 tokenRefresh.await()
-                call()
+                call.invoke()
             }
         } catch (e: UnknownHostException) {
+            // TODO: handle the error
         }
     }
 
