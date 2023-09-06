@@ -4,6 +4,6 @@ import org.koin.dsl.module
 
 val networkModule = module {
     factory<NetworkCallHandler> {
-        NetworkCallHandler(get(), get())
+        NetworkCallHandler(get(), get(), get())
     }
 }
